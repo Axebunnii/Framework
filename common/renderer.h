@@ -7,6 +7,10 @@
 #include <common/scene.h>
 #include <common/camera.h>
 #include <common/sprite.h>
+#include <common/mesh.h>
+#include <common/grid.h>
+
+#include "tilemap.h"
 
 class Renderer
 {
@@ -25,10 +29,22 @@ private:
 
 	GLFWwindow* _window;
 
+	Mesh* mesh;
+
 	GLuint loadShaders(
 		const std::string& vertex_file_path,
 		const std::string& fragment_file_path
 	);
+
+	void _renderLine(const glm::mat4 modelMatrix, Grid* line);
+	void _renderMap();
+
+	Grid* grid;
+
+	/*inline void _renderMesh(const glm::mat4 modelMatrix, Shader* shader,
+		Mesh* mesh, int numverts, GLuint mode, RGBAColor blendcolor);*/
+	inline void _renderMesh(const glm::mat4 modelMatrix,
+		int numverts, GLuint mode);
 
 	GLuint _programID;
 

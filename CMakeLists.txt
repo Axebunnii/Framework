@@ -71,6 +71,12 @@ add_library(common # ar rcs libcommon.a
 	common/scene.cpp
 	common/sprite.h
 	common/sprite.cpp
+	common/grid.h
+	common/grid.cpp
+	common/mesh.h
+	common/mesh.cpp
+	common/tilemap.h
+	common/tilemap.cpp
 )
 
 # Demo

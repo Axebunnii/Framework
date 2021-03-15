@@ -16,6 +16,7 @@
 
 Renderer::Renderer()
 {
+	grid = new Grid();
 	// We get the camera from the scene later
 	_camera = nullptr;
 
@@ -259,4 +260,129 @@ GLuint Renderer::loadShaders(const std::string& vertex_file_path, const std::str
 	glDeleteShader(fragmentShaderID);
 
 	return programID;
+}
+
+void Renderer::_renderLine(const glm::mat4 modelMatrix, Grid* line)
+{
+	// This will identify our vertex buffer
+	GLuint vertexbuffer;
+	// Generate 1 buffer, put the resulting identifier in vertexbuffer
+	glGenBuffers(1, &vertexbuffer);
+	// The following commands will talk about our 'vertexbuffer' buffer
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	// Give the vertices to OpenGL.
+	glBufferData(GL_ARRAY_BUFFER, grid->linePoints.size() * sizeof(glm::vec3), grid->vertexLinePoints, GL_STATIC_DRAW);
+
+	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glVertexAttribPointer(
+		0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+		3,                  // size
+		GL_FLOAT,           // type
+		GL_FALSE,           // normalized?
+		0,                  // stride
+		(void*)0            // array buffer offset
+	);
+	// Draw the triangle !
+	glDrawArrays(GL_LINES, 0, 2); // Starting from vertex 0; 2 vertices total -> 1 line
+	glDisableVertexAttribArray(0);
+
+
+	/*int linepoints = (line->points().size() * 2) - 1;
+	if (line->closed()) {
+		linepoints += 1;
+	}*/
+
+	/*if (line->dynamic()) {
+		mesh = new Mesh();
+		mesh->generateLine(line);
+	}
+	else {
+		mesh = _resman.getLineMesh(line);
+	}
+
+	if (line->dynamic()) {
+		delete mesh;
+	}*/
+}
+
+void Renderer::_renderMap() {
+	/*for (int c = 0; c < tilemap.cols; c++) {
+		for (int r = 0; r < tilemap.rows; r++) {
+			TileMap* tile = tilemap.getTile(c, r);
+			if (tile != = 0) { // 0 => empty tile
+				this.ctx.drawImage(
+					this.tileAtlas, // image
+					(tile - 1) * map.tsize, // source x
+					0, // source y
+					map.tsize, // source width
+					map.tsize, // source height
+					c * map.tsize,  // target x
+					r * map.tsize, // target y
+					map.tsize, // target width
+					map.tsize // target height
+				);
+			}
+		}
+	}*/
+}
+
+void Renderer::_renderMesh(const glm::mat4 modelMatrix, int numverts, GLuint mode)
+{
+	// use our shader program
+	//glUseProgram(shader->programID());
+
+	// generate the ModelMatrix
+	//glm::mat4 MVP = _projectionMatrix * _viewMatrix * modelMatrix;
+
+	// ... and send our transformation to the currently bound shader, in the "MVP" uniform
+	//glUniformMatrix4fv(shader->matrixID(), 1, GL_FALSE, &MVP[0][0]);
+
+	// _blendColorID
+	//glUniform4f(shader->blendColorID(), (float)blendcolor.r / 255.0f, (float)blendcolor.g / 255.0f, (float)blendcolor.b / 255.0f, (float)blendcolor.a / 255.0f);
+
+	// Set our "textureSampler" sampler to user Texture Unit 0
+	//glUniform1i(shader->textureID(), 0);
+
+	// Set our "paletteSampler" sampler to user Texture Unit 1
+	/*if (shader->paletteID() != -1) {
+		glUniform1i(shader->paletteID(), 1);
+	}*/
+
+	// Note: We generated vertices in the correct order, with normals facing the camera.
+	// We can also get the normalbuffer from the Mesh, but that's ignored here.
+	// Use the normalbuffer (with links to the Shader) if you want to use lighting on your Sprites.
+	// TODO: implement
+	//GLuint vertexPositionID = glGetAttribLocation(shader->programID(), "vertexPosition"); // Mesh::_vertexbuffer
+	//GLuint vertexUVID = glGetAttribLocation(shader->programID(), "vertexUV"); // Mesh::_uvbuffer
+
+	//// 1st attribute buffer : vertices
+	//glEnableVertexAttribArray(vertexPositionID);
+	////glBindBuffer(GL_ARRAY_BUFFER, mesh->vertexbuffer());
+	//glVertexAttribPointer(
+	//	vertexPositionID,             // The attribute we want to configure
+	//	3,                            // size : x+y+z => 3
+	//	GL_FLOAT,                     // type
+	//	GL_FALSE,                     // normalized?
+	//	0,                            // stride
+	//	(void*)0                      // array buffer offset
+	//);
+
+	//// 2nd attribute buffer : UVs
+	//glEnableVertexAttribArray(vertexUVID);
+	////glBindBuffer(GL_ARRAY_BUFFER, mesh->uvbuffer());
+	//glVertexAttribPointer(
+	//	vertexUVID,                   // The attribute we want to configure
+	//	2,                            // size : U+V => 2
+	//	GL_FLOAT,                     // type
+	//	GL_FALSE,                     // normalized?
+	//	0,                            // stride
+	//	(void*)0                      // array buffer offset
+	//);
+
+	//// Draw the triangles or lines
+	//glDrawArrays(mode, 0, numverts);
+
+	//glDisableVertexAttribArray(vertexPositionID);
+	//glDisableVertexAttribArray(vertexUVID);
 }

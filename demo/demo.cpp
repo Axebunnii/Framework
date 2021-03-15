@@ -9,6 +9,8 @@
 #include <common/camera.h>
 #include <common/scene.h>
 #include <common/sprite.h>
+#include <common/grid.h>
+#include <common/tilemap.h>
 
 int main( void )
 {
@@ -27,6 +29,8 @@ int main( void )
 	scene->addSprite(kingkong);
 	scene->addSprite(pencils);
 	scene->addSprite(rgba);
+
+	TileMap* map = new TileMap("d/wsa", 2, 4, 1);
 
 	do {
 		// get deltaTime and update camera
