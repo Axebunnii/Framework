@@ -9,7 +9,3 @@ Mesh::Mesh() {
 Mesh::~Mesh() {
 
 }
-
-void Mesh::generateLine(Grid* line) {
-
-}

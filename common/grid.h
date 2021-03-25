@@ -19,16 +19,11 @@ public:
 	bool closed() { return _closed; };
 	void closed(bool c) { _closed = c; };
 
-	std::vector<glm::vec3>& points() { return linePoints; };
-
-	std::vector<glm::vec3> vertexLinePoints;
-	std::vector<glm::vec3> linePoints;
-
 private:
-	unsigned int rows;
-	unsigned int cols;
+	unsigned int rows = 1;
+	unsigned int cols = 1;
 
-	unsigned int cell;
+	unsigned int cell = 1;
 
 	bool _dynamic;
 	bool _closed = false;

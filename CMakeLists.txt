@@ -77,6 +77,8 @@ add_library(common # ar rcs libcommon.a
 	common/mesh.cpp
 	common/tilemap.h
 	common/tilemap.cpp
+	common/line.h
+	common/line.cpp
 )
 
 # Demo

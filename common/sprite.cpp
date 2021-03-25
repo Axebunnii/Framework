@@ -73,7 +73,7 @@ GLuint Sprite::loadTGA(const std::string& imagepath)
 	std::cout << "Loading TGA: " << imagepath << std::endl;
 
 	// Open the file on disk
-	FILE *file;
+	FILE* file;
 
 	file = fopen(imagepath.c_str(), "rb");
 
@@ -85,9 +85,9 @@ GLuint Sprite::loadTGA(const std::string& imagepath)
 	// Read header (width, height, type, bitdepth)
 	unsigned char type[4];
 	unsigned char info[6];
-	if (!fread (&type, sizeof (char), 3, file)) return 0;
-	fseek (file, 12, SEEK_SET);
-	if (!fread (&info, sizeof (char), 6, file)) return 0;
+	if (!fread(&type, sizeof(char), 3, file)) return 0;
+	fseek(file, 12, SEEK_SET);
+	if (!fread(&info, sizeof(char), 6, file)) return 0;
 
 	//image type needs to be 2 (color) or 3 (grayscale)
 	if (type[1] != 0 || (type[2] != 2 && type[2] != 3))
@@ -123,7 +123,7 @@ GLuint Sprite::loadTGA(const std::string& imagepath)
 	unsigned int imagesize = _width * _height * bitdepth;
 
 	// Create a buffer
-	unsigned char* data = new unsigned char [imagesize];
+	unsigned char* data = new unsigned char[imagesize];
 
 	// Read the actual data from the file into the buffer
 	if (!fread(data, 1, imagesize, file)) return 0;
@@ -142,33 +142,33 @@ GLuint Sprite::loadTGA(const std::string& imagepath)
 	// filter the Texture
 	unsigned char filter = 1;
 	switch (filter) {
-		case 0:
-			// No filtering.
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			break;
-		case 1:
-			// Linear filtering.
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			break;
-		case 2:
-			// Bilinear filtering.
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
-			glGenerateMipmap(GL_TEXTURE_2D);
-			break;
-		case 3:
-			// Trilinear filtering.
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-			glGenerateMipmap(GL_TEXTURE_2D);
-			break;
-		default:
-			// No filtering.
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-			break;
+	case 0:
+		// No filtering.
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		break;
+	case 1:
+		// Linear filtering.
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		break;
+	case 2:
+		// Bilinear filtering.
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
+		glGenerateMipmap(GL_TEXTURE_2D);
+		break;
+	case 3:
+		// Trilinear filtering.
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glGenerateMipmap(GL_TEXTURE_2D);
+		break;
+	default:
+		// No filtering.
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		break;
 	}
 
 	// wrapping
@@ -178,24 +178,24 @@ GLuint Sprite::loadTGA(const std::string& imagepath)
 
 	// handle transparency and grayscale and give the image to OpenGL
 	switch (bitdepth) {
-		case 4:
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			glEnable(GL_BLEND);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _width, _height, 0, GL_BGRA, GL_UNSIGNED_BYTE, data);
-			break;
-		case 3:
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _width, _height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
-			break;
-		case 1:
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, _width, _height, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, data);
-			break;
-		default:
-			std::cout << "error: bitdepth not 4, 3, or 1" << std::endl;
-			break;
+	case 4:
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_BLEND);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, _width, _height, 0, GL_BGRA, GL_UNSIGNED_BYTE, data);
+		break;
+	case 3:
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, _width, _height, 0, GL_BGR, GL_UNSIGNED_BYTE, data);
+		break;
+	case 1:
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE, _width, _height, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, data);
+		break;
+	default:
+		std::cout << "error: bitdepth not 4, 3, or 1" << std::endl;
+		break;
 	}
 
 	// OpenGL has now copied the data. Free our own version
-	delete [] data;
+	delete[] data;
 
 	// Return the ID of the texture we just created
 	return textureID;

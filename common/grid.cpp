@@ -10,7 +10,7 @@ Grid::Grid(/*int xSize, int ySize, int cellSize*/) {
 
 	_dynamic = false;
 
-	drawGrid(rows, cols, cell);*/
+	drawGrid(rows, cols, cell*/
 }
 
 Grid::~Grid() {
@@ -30,12 +30,4 @@ void Grid::drawGrid(int xSize, int ySize, int cellSize) {
 			this->closed(true);
 		}
 	}
-}
-
-void Grid::line(int x1, int y1, int x2, int y2)
-{
-	static const std::vector<GLint> linePoints = {
-		x1, y1,
-		x2, y2,
-	};
 }

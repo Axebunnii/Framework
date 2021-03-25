@@ -8,7 +8,7 @@
 #include <common/camera.h>
 #include <common/sprite.h>
 #include <common/mesh.h>
-#include <common/grid.h>
+#include <common/grid.h>s
 
 #include "tilemap.h"
 
@@ -36,17 +36,16 @@ private:
 		const std::string& fragment_file_path
 	);
 
-	void _renderLine(const glm::mat4 modelMatrix, Grid* line);
+	void _renderLine(Line* line);
 	void _renderMap();
 
-	Grid* grid;
 
 	/*inline void _renderMesh(const glm::mat4 modelMatrix, Shader* shader,
 		Mesh* mesh, int numverts, GLuint mode, RGBAColor blendcolor);*/
-	inline void _renderMesh(const glm::mat4 modelMatrix,
-		int numverts, GLuint mode);
+		//int numverts, GLuint mode);
 
 	GLuint _programID;
+	GLuint programID;
 
 	Camera* _camera; // reference to scene->camera
 };

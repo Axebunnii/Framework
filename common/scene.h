@@ -5,6 +5,7 @@
 #include <common/camera.h>
 #include <common/sprite.h>
 #include <common/grid.h>
+#include <common/line.h>
 
 class Scene
 {
@@ -14,15 +15,16 @@ public:
 
 	virtual void update(float deltaTime);
 	void addSprite(Sprite* sprite);
-	void addGrid(Grid* grid);
+	void addLine(Line* line);
 
 	Camera* camera() { return _camera; };
 	std::vector<Sprite*>& sprites() { return _sprites; };
+	std::vector<Line*>& lines() { return _lines; };
 
 private:
 	Camera* _camera;
 	std::vector<Sprite*> _sprites;
-	std::vector<Grid*> grids;
+	std::vector<Line*> _lines;
 };
 
 #endif /* SCENE_H */

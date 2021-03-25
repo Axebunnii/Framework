@@ -8,7 +8,6 @@ class Mesh
 public:
 	Mesh();
 	virtual ~Mesh();
-	void Mesh::generateLine(Grid* line);
 
 private:
 	

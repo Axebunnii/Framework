@@ -18,12 +18,12 @@ Scene::~Scene()
 	_sprites.clear();
 
 	// Delete all the grids
-	for (size_t i = 0; i < grids.size(); i++)
+	for (size_t i = 0; i < _lines.size(); i++)
 	{
-		delete grids[i];
-		grids[i] = nullptr;
+		delete _lines[i];
+		_lines[i] = nullptr;
 	}
-	grids.clear();
+	_lines.clear();
 
 	// Delete camera
 	delete _camera;
@@ -39,6 +39,6 @@ void Scene::addSprite(Sprite* sprite)
 	_sprites.push_back(sprite);
 }
 
-void Scene::addGrid(Grid* grid) {
-	grids.push_back(grid);
+void Scene::addLine(Line* line) {
+	_lines.push_back(line);
 }
