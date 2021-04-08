@@ -2,6 +2,8 @@
 #define SPRITE_H
 
 #include <string>
+#include <GL/glew.h>
+#include <glm/gtc/matrix_transform.hpp>
 
 class Sprite
 {

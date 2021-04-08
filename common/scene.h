@@ -6,6 +6,7 @@
 #include <common/sprite.h>
 #include <common/grid.h>
 #include <common/line.h>
+#include <common/tilemap.h>
 
 class Scene
 {
@@ -16,6 +17,7 @@ public:
 	virtual void update(float deltaTime);
 	void addSprite(Sprite* sprite);
 	void addLine(Line* line);
+	void addTilemap(TileMap* tilemap);
 
 	Camera* camera() { return _camera; };
 	std::vector<Sprite*>& sprites() { return _sprites; };
@@ -25,6 +27,7 @@ private:
 	Camera* _camera;
 	std::vector<Sprite*> _sprites;
 	std::vector<Line*> _lines;
+	std::vector<TileMap*> maps;
 };
 
 #endif /* SCENE_H */

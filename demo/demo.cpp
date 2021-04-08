@@ -9,6 +9,7 @@
 #include <common/camera.h>
 #include <common/scene.h>
 #include <common/sprite.h>
+#include <common/Tilemap.h>
 
 int main(void)
 {
@@ -16,7 +17,7 @@ int main(void)
 
 	Scene* scene = new Scene();
 
-	Sprite* kingkong = new Sprite("assets/kingkong.tga");
+	/*Sprite* kingkong = new Sprite("assets/kingkong.tga");
 	kingkong->position = glm::vec3(400.0f, 300.0f, 0.0f);
 	Sprite* pencils = new Sprite("assets/pencils.tga");
 	pencils->position = glm::vec3(900.0f, 300.0f, 0.0f);
@@ -26,7 +27,25 @@ int main(void)
 
 	scene->addSprite(kingkong);
 	scene->addSprite(pencils);
-	scene->addSprite(rgba);
+	scene->addSprite(rgba);*/
+	//std::vector<std::vector<TileMap*>> map;
+
+	TileMap* tilemap = new TileMap();
+	
+	//map->position = glm::vec3(WIDTH / 2, HEIGHT / 2, 0.0f);
+
+	//TileMap* map[2][4]{
+	char map[4]{
+		0, 1,
+		1, 0
+	};
+	tilemap->DrawMap("assets/kingkong.tga", map, 2, 2, 5);
+
+	scene->addTilemap(tilemap);
+
+	/*Sprite* tilesheet = new Sprite("assets/tilesheet.tga");
+	scene->addSprite(tilesheet);
+	tilesheet->position = glm::vec3(WIDTH / 2, HEIGHT / 2, 0.0f);*/
 
 	do {
 		// get deltaTime and update camera
@@ -35,7 +54,7 @@ int main(void)
 
 		// Update the scene
 		scene->update(dt); // TODO make subclass for Scene (and make Scene abstract?)
-		rgba->rotation += dt; // for now, do it here
+		//rgba->rotation += dt; // for now, do it here
 
 		// Render the scene
 		renderer.renderScene(scene);

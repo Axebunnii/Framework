@@ -1,17 +1,25 @@
 #ifndef TILEMAP_H
 #define TILEMAP_H
 
+#include <fstream>
+#include <sstream>
+#include <vector>
+
+#include "sprite.h"
 
 class TileMap
 {
 public:
-	TileMap(const std::string& filename, int col, int row, float tsize);
+	TileMap();
 	virtual ~TileMap();
+	void DrawMap(const std::string& filename, char* map, int rows, int cols, float tileSize);
+	Sprite* TileMap::GetTile(int x, int y);
+	std::vector<Sprite*> maplist;
 
 private:
-	int cols = 0;
-	int rows = 0;
-	float tileSize = 0;
+	int c = 0;
+	int r = 0;
+	float tsize = 0;
 };
 
 

@@ -25,6 +25,13 @@ Scene::~Scene()
 	}
 	_lines.clear();
 
+	for (size_t i = 0; i < maps.size(); i++)
+	{
+		delete maps[i];
+		maps[i] = nullptr;
+	}
+	maps.clear();
+
 	// Delete camera
 	delete _camera;
 }
@@ -41,4 +48,12 @@ void Scene::addSprite(Sprite* sprite)
 
 void Scene::addLine(Line* line) {
 	_lines.push_back(line);
+}
+
+void Scene::addTilemap(TileMap* tilemap) {
+	TileMap* tm = new TileMap();
+	std::cout << tm->maplist.size()<< std::endl;
+	for (int i = 0; i < tm->maplist.size(); i++) {
+		_sprites.push_back(tm->maplist[i]);
+	}
 }
