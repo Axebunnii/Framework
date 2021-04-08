@@ -26,7 +26,7 @@ void TileMap::DrawMap(const std::string& filename, char* map, int rows, int cols
 		std::cout << maplist.size() << std::endl;
 	}
 
-	for (int i = 0; i < r; i++) {
+	/*for (int i = 0; i < r; i++) {
 		for (int ii = 0; ii < c; ii++) {
 			Sprite* tile = GetTile(c, r);
 			tile->position.x = i * tsize;
@@ -35,7 +35,7 @@ void TileMap::DrawMap(const std::string& filename, char* map, int rows, int cols
 			//float y = r * tsize;
 			//drawTile(tile, x, y);
 		}
-	}
+	}*/
 }
 
 Sprite* TileMap::GetTile(int x, int y) {
