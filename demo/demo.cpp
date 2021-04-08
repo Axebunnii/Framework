@@ -39,7 +39,7 @@ int main(void)
 		0, 1,
 		1, 0
 	};
-	tilemap->DrawMap("assets/kingkong.tga", map, 2, 2, 5);
+	tilemap->DrawMap("assets/kingkong.tga", map, 10, 10, 260);
 
 	scene->addTilemap(tilemap);
 
