@@ -13,48 +13,29 @@ TileMap::~TileMap() {
 void TileMap::DrawMap(const std::string& filename, char* map, int rows, int cols, float tileSize) {
 	r = rows;
 	c = cols;
-	//tsize = tileSize;
 	std::cout << "filename: " << filename << std::endl;
 	int t;
-	//GetTile(filename, tileSize, f);
 
 	size_t size = r * c;
-	//for (size_t i = 0; i < size; i++) {
-		//this->maplist.push_back(map[i]);
 	for (size_t i = 0; i < size; i++) {
 		t = GetTile(filename, tileSize, map[i]);
 		std::cout << "tile: " << t << std::endl;
 	}
 		
+	for (int ix = 0; ix < r; ix++) {
+		for (int iy = 0; iy < c; iy++) {
+			Sprite* tile = new Sprite(filename);
 
-		for (int ix = 0; ix < r; ix++) {
-			for (int iy = 0; iy < c; iy++) {
-				Sprite* tile = new Sprite(filename);
+			tile->position.x = ix * tileSize;
+			tile->position.y = iy * tileSize;
 
-				tile->position.x = ix * tileSize;
-				tile->position.y = iy * tileSize;
+			std::cout << "x: " << tile->position.x << std::endl;
+			std::cout << "y: " << tile->position.y << std::endl;
 
-				std::cout << "x: " << tile->position.x << std::endl;
-				std::cout << "y: " << tile->position.y << std::endl;
-
-				maplist.push_back(tile);
-				std::cout << maplist.size() << std::endl;
-			}
+			maplist.push_back(tile);
+			std::cout << maplist.size() << std::endl;
 		}
-
-		
-	//}
-
-	/*for (int i = 0; i < r; i++) {
-		for (int ii = 0; ii < c; ii++) {
-			//Sprite* tile = GetTile(c, r);
-			tile->position.x = i * tsize;
-			tile->position.y = ii * tsize;
-			//float x = c * tsize;
-			//float y = r * tsize;
-			//drawTile(tile, x, y);
-		}
-	}*/
+	}
 }
 
 int TileMap::GetTile(const std::string& filename, float tileSize, int f) {

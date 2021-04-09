@@ -51,7 +51,6 @@ void Scene::addLine(Line* line) {
 }
 
 void Scene::addTilemap(TileMap* tilemap) {
-	//TileMap* tm = tilemap;
 	std::cout << tilemap->maplist.size()<< std::endl;
 	for (int i = 0; i < tilemap->maplist.size(); i++) {
 		_sprites.push_back(tilemap->maplist[i]);

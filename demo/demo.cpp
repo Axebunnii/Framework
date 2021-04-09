@@ -17,19 +17,6 @@ int main(void)
 
 	Scene* scene = new Scene();
 
-	/*Sprite* kingkong = new Sprite("assets/kingkong.tga");
-	kingkong->position = glm::vec3(400.0f, 300.0f, 0.0f);
-	Sprite* pencils = new Sprite("assets/pencils.tga");
-	pencils->position = glm::vec3(900.0f, 300.0f, 0.0f);
-	Sprite* rgba = new Sprite("assets/rgba.tga");
-	rgba->position = glm::vec3(WIDTH / 2, HEIGHT / 2, 0.0f);
-	rgba->scale = glm::vec3(3.0f, 3.0f, 1.0f);
-
-	scene->addSprite(kingkong);
-	scene->addSprite(pencils);
-	scene->addSprite(rgba);*/
-	//std::vector<std::vector<TileMap*>> map;
-
 	TileMap* tilemap = new TileMap();
 	
 	//map->position = glm::vec3(WIDTH / 2, HEIGHT / 2, 0.0f);
