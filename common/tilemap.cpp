@@ -3,9 +3,7 @@
 #include "tilemap.h"
 
 TileMap::TileMap() {
-	/*tsize = tileSize;
-	std::cout << "filename: " << filename << std::endl;
-	f = filename;*/
+	
 }
 
 TileMap::~TileMap() {
@@ -17,10 +15,16 @@ void TileMap::DrawMap(const std::string& filename, char* map, int rows, int cols
 	c = cols;
 	//tsize = tileSize;
 	std::cout << "filename: " << filename << std::endl;
+	int t;
+	//GetTile(filename, tileSize, f);
 
 	size_t size = r * c;
 	//for (size_t i = 0; i < size; i++) {
 		//this->maplist.push_back(map[i]);
+	for (size_t i = 0; i < size; i++) {
+		t = GetTile(filename, tileSize, map[i]);
+		std::cout << "tile: " << t << std::endl;
+	}
 		
 
 		for (int ix = 0; ix < r; ix++) {
@@ -53,6 +57,30 @@ void TileMap::DrawMap(const std::string& filename, char* map, int rows, int cols
 	}*/
 }
 
-Sprite* TileMap::GetTile(int x, int y) {
-	return 0;
+int TileMap::GetTile(const std::string& filename, float tileSize, int f) {
+	float uvwidth = 1.0f / tileSize;
+	float uvheight = 1.0f / tileSize;
+
+	//the part of the spritesheet that will be rendered
+	glm::vec3 uvoffset = glm::vec3(0.0f, 0.0f, 0.0f);
+
+	int w = 1.0f / uvwidth;
+	int h = 1.0f / uvheight;
+
+	if (f >= w * h) {
+		frame = 0;
+		uvoffset.x = 0;
+		uvoffset.y = 0;
+		return frame;
+	}
+
+	/*int ypos = f / w;
+	int xpos = f % w;*/
+
+	/*uvoffset.x = xpos * uvwidth;
+	uvoffset.y = ypos * uvheight;*/
+
+	frame = f;
+
+	return frame;
 }

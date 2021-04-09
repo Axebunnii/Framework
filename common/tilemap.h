@@ -13,13 +13,14 @@ public:
 	TileMap();
 	virtual ~TileMap();
 	void DrawMap(const std::string& filename, char* map, int rows, int cols, float tileSize);
-	Sprite* TileMap::GetTile(int x, int y);
+	int TileMap::GetTile(const std::string& filename, float tileSize, int f);
 	std::vector<Sprite*> maplist;
 
 private:
 	int c = 0;
 	int r = 0;
 	float tsize = 0;
+	int frame;
 };
 
 
